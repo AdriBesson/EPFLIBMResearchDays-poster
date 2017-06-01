@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Signal Processing Laboratory (LTS5) - EPFL      %
+% LaTeX beamposter template                       %
+% Authors:                                        %
+%   D. Perdios – dimitris.perdios@epfl.ch         %
+%   A. Besson – adrien.besson@epfl.ch             %
+% v0.1 - 08.05.17                                 %
+% Typeset configuration: pdfLaTeX + Biber         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% New command used to create a blank column
+\newcommand{\AddBlankColumn}{
+	\begin{column}{\BlankColumnWidth}\end{column}
+}
+
+%%% CUSTOM MAKETITLE COMMAND %%%
+\newlength{\logoWidthLeft}
+\newlength{\logoWidthRight}
+\newlength{\logoHeightSpace}
+\newlength{\titlewidth}
+\setlength{\logoWidthLeft}{7.5cm}
+\setlength{\logoWidthRight}{7.5cm}
+\setlength{\logoHeightSpace}{0.5cm}
+\setlength{\titlewidth}{\dimexpr \textwidth - \logoWidthLeft - \logoWidthRight - 0.8cm}
+\renewcommand{\maketitle}{%
+	\begin{minipage}{\logoWidthLeft}%
+		\includegraphics[width=\logoWidthLeft]{logos/epfl_logo.pdf}
+		\vspace{\logoHeightSpace}
+		\includegraphics[width=\logoWidthLeft]{logos/lts5_logo.pdf}
+	\end{minipage} \hfill%
+	\begin{minipage}{\titlewidth}%
+		 \centering
+		 \Large\inserttitle \\%
+		 \normalsize\insertauthor \\%
+		 \small\insertinstitute%
+	\end{minipage} \hfill%
+	\begin{minipage}{\logoWidthRight}%
+		\includegraphics[width=\logoWidthRight]{logos/logo_spars.png}
+		\vspace{\logoHeightSpace}
+		\includegraphics[width=\logoWidthLeft]{logos/basp_logo.png}
+	\end{minipage}
+}
+
+%%% SIZES OF THE DIFFERENT COLUMNS
+\newlength{\BlankColumnWidth}
+\newlength{\LeftColumnWidth}
+\newlength{\RightColumnWidth}
