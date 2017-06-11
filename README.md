@@ -1,1 +1,1 @@
-EPFL-IBM_ResearchDays
+LTS5-poster
