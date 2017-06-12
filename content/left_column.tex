@@ -6,8 +6,8 @@
 \begin{block}{Introduction and objectives}
 	
 	\begin{itemize}
-		\item The point spread function (PSF), \ie the response of a system to a point source, is a measure of the quality of an ultrasound~(US) imager
-		\item PSF usuallycrudely estimated by assuming spatial-invariance, or estimated via simulation, coupled with reconstruction algorithms 
+		\item The point spread function (PSF), \ie{} the response of a system to a point source, is a measure of the quality of an ultrasound~(US) imager
+		\item PSF usually estimated by assuming spatial-invariance, or estimated via simulation coupled with reconstruction algorithms 
 		\item Lack of an analytical formulation inhibits many applications ranging from optimization of apodization schemes, to array-design to and deconvolution algorithms
 		\item We propose an analytical formulation of the PSF and use it for deconvolution of US images
 	\end{itemize}
@@ -20,7 +20,6 @@
 %----------------------------------------------------------------------------------------
 
 \begin{block}{Notations and data-model}
-	
 	\begin{columns} % Subdivide the first main column
 		\begin{column}{.54\textwidth} % The first subdivided column within the first main column
 			\begin{itemize}
@@ -70,8 +69,7 @@
 			&= \int \limits_{\Omega} \left[\sum \limits_{i=1}^{N_{el}} w_i h \left(\tau \left(\vect{r}, \vect{r}_i\right) - \tau \left(\vect{r}', \vect{r}_i\right) \right)\right] \gamma\left(\vect{r}'\right) d \vect{r}'
 		\end{align}
 		where $b \left(\vect{r}', \vect{r}_i\right) = 1$
-		\item One may deduce from Equation~\eqref{eq_DAS_estimate} 
-		the kernel of the PSF:
+		\item One may deduce the kernel of the PSF from Equation~\eqref{eq_DAS_estimate}:
 		\begin{equation}
 			\label{eq_PSF_estimate}
 			PSF \left(\vect{r}, \vect{r}'\right) = \sum \limits_{i=1}^{N_{el}} w_i h \left(\tau \left(\vect{r}, \vect{r}_i\right) - \tau \left(\vect{r}', \vect{r}_i\right) \right), \; \forall \left(\vect{r}, \vect{r}'\right) \in \Omega^2
