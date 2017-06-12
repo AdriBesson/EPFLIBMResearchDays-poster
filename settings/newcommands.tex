@@ -1,0 +1,62 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Signal Processing Laboratory (LTS5) - EPFL      %
+% LaTeX beamposter template                       %
+% Authors:                                        %
+%   D. Perdios – dimitris.perdios@epfl.ch         %
+%   A. Besson – adrien.besson@epfl.ch             %
+% v0.1 - 08.05.17                                 %
+% Typeset configuration: pdfLaTeX + Biber         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% New command used to create a blank column
+
+\newcommand{\AddBlankColumn}[1]{
+	\begin{column}{#1}\end{column}
+}
+
+%%% SIZES OF THE MARGINS AND COLUMNS
+
+%%% CUSTOM MAKETITLE COMMAND %%%
+\newlength{\LogoWidthLeft}
+\settowidth{\LogoWidthLeft}{\includegraphics[height=\LogoHeight]{logos/lts5_logo.pdf}}
+\newlength{\LogoWidthRight}
+\settowidth{\LogoWidthRight}{\includegraphics[height=\LogoHeight]{logos/epfl_logo.pdf}}
+\setlength{\titlewidth}{\LeftColumnWidth + \RightColumnWidth + \BlankColumnWidthCenter- \LogoWidthLeft - \LogoWidthRight - \BlankColumnWidthLeft-\BlankColumnWidthRight}
+\newsavebox{\titlebox}
+\newlength{\myposterheight}
+\renewcommand{\maketitle}{%
+	\savebox{\titlebox}{%
+		\hspace{\BlankColumnWidthLeft}
+		\begin{minipage}{\LogoWidthLeft}%
+			\includegraphics[height=\LogoHeight]{logos/basp_logo.png}
+			\vspace{\LogoSkip}
+			\centering
+			\includegraphics[height=\LogoHeight]{logos/lts5_logo.pdf}
+		\end{minipage} 
+		\begin{minipage}{\titlewidth}%
+			\centering
+			\LARGE\inserttitle \leavevmode\\%
+			\normalsize\insertauthor \leavevmode\\%
+			\small\insertinstitute %
+		\end{minipage} 
+		\begin{minipage}{\LogoWidthRight}%
+			\includegraphics[height=\LogoHeight]{logos/epfl_logo.pdf}
+			\vspace{\LogoSkip}
+			\centering
+			\includegraphics[height=\LogoHeight]{logos/lts5_logo.pdf}
+		\end{minipage}
+		\hspace{\BlankColumnWidthRight}
+	}%
+	\settoheight{\titleheight}{\usebox{\titlebox}}
+	\setlength{\myposterheight}{0.97\textheight - \titleheight - \TitleColumnSpace}
+	\usebox{\titlebox}
+}
+
+% *** USEFUL COMMANDS ***
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\etal}{\textit{et al.}}
+\newcommand{\vect}[1]{\bm{#1}}
+\newcommand{\ser}[2]{#1^#2}
+\newcommand{\mat}[1]{\mathsf{#1}}
+\DeclareMathOperator{\R}{\mathbb{R}}
