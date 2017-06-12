@@ -1,8 +1,9 @@
+\vbox to \myposterheight{%
 %----------------------------------------------------------------------------------------
 %	OBJECTIVES
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Objectives}
+\begin{block}{Introduction and objectives}
 	
 	\begin{enumerate}
 		\item Donec fringilla, velit id lobortis commodo, eros dui consectetur mi, ut interdum lorem dui sed mauris.
@@ -11,37 +12,24 @@
 	\end{enumerate}
 	
 \end{block}
+\vfill
 
 %----------------------------------------------------------------------------------------
 %	INTRODUCTION
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Introduction}
-	
-	\begin{itemize}
-		\item Donec fringilla, velit id lobortis commodo, eros dui consectetur mi, ut interdum lorem dui sed mauris.
-		\item Nulla ac nulla rhoncus est bibendum ullamcorper:
-		\item Quisque vestibulum, nisl sit amet gravida ultricies dis parturient montes, nascetur ridiculus musobortis commodo, eros dui consectetur mi.
-	\end{itemize}
-	
-\end{block}
-
-%----------------------------------------------------------------------------------------
-%	MATERIALS
-%----------------------------------------------------------------------------------------
-
-\begin{block}{Materials}
+\begin{block}{Notations and data-model}
 	
 	\begin{columns} % Subdivide the first main column
 		\begin{column}{.54\textwidth} % The first subdivided column within the first main column
 			\begin{itemize}
-				\item Vestibulum nisl, quis euismod velit eros in ligula.
+				\item Notations:
 				\begin{itemize}
-					\item Cras rhoncus quam et augue convallis in elementum urna tincidunt.
-				\end{itemize}
-				\item Proin ut vestibulum augue.
-				\begin{itemize}
-					\item Donec dapibus sagittis neque eu ultrices.
+					\item 1D probe composed of $N_{el}$ transducer elements located at $\bm{r}_i$
+					\item $m_i\left(t\right)$ signal received at $i^{th}$ element
+					\item Medium $\Omega \subset \mathbb{R}^2$ characterized by its tissue reflectivity function~(TRF) $\gamma \left(\vect{r}\right)$
+					\item $b \left(\vect{r}, \vect{r}_i\right)$ spatially varying attenuation term  
+					\item $h\left(t\right)$ is the elementary waveform
 				\end{itemize}
 			\end{itemize}
 		\end{column}
@@ -49,90 +37,91 @@
 		\begin{column}{.43\textwidth} % The second subdivided column within the first main column
 			\centering
 			\begin{figure}
-				\includegraphics[width=0.8\linewidth]{fig_ex1_subfig1.pdf}
-				\caption{Figure caption}
+				{\footnotesize
+					\input{tikz/tikz_notations_scheme}}
+				%\includegraphics[width=0.9\linewidth]{tikz_SPARS-crop.pdf}
+				\caption{Standard setting for US imaging}
 			\end{figure}
 		\end{column}
 	\end{columns} % End of the subdivision
 	
 	\begin{itemize}
-		\item Curabitur sapien ligula, faucibus in feugiat quis, vestibulum a turpis.
-		\begin{itemize}
-			\item Phasellus quis nunc neque. Suspendisse mauris diam, suscipit non gravida in, placerat id enim. Ut nec ipsum in lectus ultrices sagittis.
-			\item Ut nec ipsum in lectus ultrices sagittis.
-			\item Phasellus quis nunc neque.
-		\end{itemize}
+		\item Data-model for a transducer located at $\vect{r}_i$:
+		\begin{equation}
+			m \left(\vect{r}_i, t\right) = \int \limits_{\Omega} b \left(\vect{r}', \vect{r}_i\right) h \left(t - \tau \left(\vect{r}', \vect{r}_i\right)\right) \gamma \left(\vect{r}'\right) d \vect{r}'
+		\end{equation}
+		where $\tau \left(\vect{r}', \vect{r}_i\right) = t_{TX} \left(\vect{r}\right) + \frac{\| \vect{r} - \vect{r}_i \|_2}{c}$ is the round trip time-of-flight of the US wave 
 	\end{itemize}
 	
 \end{block}
+\vfill 
 
 %----------------------------------------------------------------------------------------
-%	METHODS
+%	PSF
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Methods}
-	
+\begin{block}{Model of the point spread function}
 	\begin{itemize}
-		\item Maecenas Vel Nisl Elit
+		\item Delay-and-sum~(DAS) estimate~(also called RF image) of the TRF:
+		\begin{align}
+		\label{eq_DAS_estimate}
+			\ser{\gamma}{{DAS}} \left(\vect{r}\right) &= \sum \limits_{i=1}^{N_{el}} w_i m \left(\vect{r}_i, \tau \left(\vect{r}, \vect{r}_i\right)\right) \nonumber \\
+			&= \int \limits_{\Omega} \left[\sum \limits_{i=1}^{N_{el}} w_i h \left(\tau \left(\vect{r}, \vect{r}_i\right) - \tau \left(\vect{r}', \vect{r}_i\right) \right)\right] \gamma\left(\vect{r}'\right) d \vect{r}'
+		\end{align}
+		where $b \left(\vect{r}', \vect{r}_i\right) = 1$
+		\item One may deduce from Equation~\eqref{eq_DAS_estimate} \textbf{the kernel of the PSF}:
+		\begin{equation}
+			\label{eq_PSF_estimate}
+			PSF \left(\vect{r}, \vect{r}'\right) = \sum \limits_{i=1}^{N_{el}} w_i h \left(\tau \left(\vect{r}, \vect{r}_i\right) - \tau \left(\vect{r}', \vect{r}_i\right) \right), \; \forall \left(\vect{r}, \vect{r}'\right) \in \Omega^2
+		\end{equation}
+		\item Generic formulation:
 		\begin{itemize}
-			\item Suspendisse potenti. Fusce a est eget turpis rhoncus varius sed sed dui. Cras justo nibh, bibendum a cursus eget, consequat et dui. Maecenas vel nisl elit, sed dignissim dolor. 
-			\item In hac habitasse platea dictumst.
-		\end{itemize}
-		
-		\item Viewpoint Matching Constraints
-		\begin{itemize}
-			\item Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-			\item Proin in nisi diam.
-			\item Nam ultricies pellentesque nunc, ultrices volutpat nisl ultrices a.
-		\end{itemize}
-		
-		\item Volutpat 
-		\begin{itemize}
-			\item Duis semper lorem eget dui dignissim porttitor.
-			\item Nulla facilisi. In ullamcorper lorem quis dolor.
+			\item Grid-independent
+			\item Compatible with any transmit scheme
+			\item Compatible with any receive apodization 
 		\end{itemize}
 	\end{itemize}
-	
 \end{block}
+\vfill
 
 %----------------------------------------------------------------------------------------
-%	MATHEMATICAL SECTION
+%	VALIDATION OF THE PROPOSED MODEL
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Mathematical Section}
-	
+\begin{block}{Validation of the proposed model}
 	\begin{itemize}
-		\item Maecenas Ultricies Feugiat Velit Non Mattis~\cite{combettes2014}.
+		\item Two phantoms are simulated: 
+		\begin{enumerate}
+			\item Point-scatterers phantom
+			\item Cyst phantom
+		\end{enumerate}
+		\item The PSF model described in Equation~\eqref{eq_PSF_estimate} is generated with the following settings:
 		\begin{itemize}
-			\item Duis ante erat, bibendum nec tempus nec, interdum quis est. Nulla at mollis tortor. Phasellus quis leo dolor, aliquam laoreet orci $X$ Donec dapibus sagittis neque eu nec, interdum quis est. $Y_n, n=1,\cdots,N$ ndum nec tempus nec, interd
-			\begin{align*}
-			X \rightarrow r(X) & = \arg \max_{c} \Big\{ \max_n \big\{ \sum_{x_i \in X} \delta(x_i,Y_{n,c})\big\} \Big\} 
-			\end{align*}
-			\item Cras faucibus scelerisque cursus. Proin ut vestibulum augue. $\delta(x_i,Y_{n,c})$
+			\item The weights $w_i$ are set to 1
+			\item The transmit scheme is plane wave with normal incidence: $t_{TX} \left(\vect{r}\right) = \frac{z}{c}$
 		\end{itemize}
-		\item Fusce tempus arcu id ligula varius dictum. Donec ut nisl dui, ac consectetur elit. In nec enim porta augue venenatis sollicitudin. Phasellus quis nunc neque. Suspendisse mauris diam, suscipit non gravida in, placerat id enim. Ut nec ipsum in lectus ultrices sagittis.
+		\item The following experiments are run:
+		\begin{enumerate}
+			\item The PSF model is convolved with the phantoms in order to get a DAS estimate
+			\item US raw-data are simulated on Field II~\cite{jensen1992} and reconstructed using standard DAS algorithm
+		\end{enumerate}
 	\end{itemize}
-	
+	\newlength{\CIRSFigWidth} \setlength{\CIRSFigWidth}{0.48\textwidth}
+	\newlength{\CIRSFigHeight}
+	\settoheight{\CIRSFigHeight}{\includegraphics[width=\CIRSFigWidth]{figures/Cyst_pht1.png}}
+	\newlength{\pointFigWidth} \setlength{\CIRSFigWidth}{0.48\textwidth}
+	\newlength{\pointFigHeight}
+	\settoheight{\pointFigHeight}{\includegraphics[width=\CIRSFigWidth]{figures/Image_IUS_2017_1.jpg}}
+	\begin{figure}
+		\centering
+		% Maximum length
+%		\subcaptionbox{Reference }{\includegraphics[height=\pointFigHeight]{figures/Image_IUS_2017_1.jpg}}
+%		\hfill%
+%		\subcaptionbox{CS reconstruction }{\includegraphics[height=\pointFigHeight]{figures/Image_IUS_2017_2.jpg}}
+		\subcaptionbox{Field II simulation }{\includegraphics[height=\CIRSFigHeight]{figures/Cyst_pht1.png}}
+		\hfill%
+		\subcaptionbox{PSF model }{\includegraphics[height=\CIRSFigHeight]{figures/Cyst_pht2.png}}
+		\caption{B-mode image reconstructed from (a) Field II simulation and (b) the proposed PSF model.}
+	\end{figure}
 \end{block}
-
-%----------------------------------------------------------------------------------------
-%	ANOTHER MATHEMATICAL SECTION
-%----------------------------------------------------------------------------------------
-
-\begin{block}{Another Mathematical Section}
-	
-	\begin{itemize}
-		\item Maecenas Ultricies Feugiat Velit Non Mattis.
-		\begin{itemize}
-			\item Duis ante erat, bibendum nec tempus nec, interdum quis est. Nulla at mollis tortor. Phasellus quis leo dolor, aliquam laoreet orci $X$ Donec dapibus sagittis neque eu nec, interdum quis est. $Y_n, n=1,\cdots,N$ ndum nec tempus nec, interd
-			\begin{align*}
-			X \rightarrow r(X) & = \arg \max_{c} \Big\{ \max_n \big\{ \sum_{x_i \in X} \delta(x_i,Y_{n,c})\big\} \Big\} 
-			\end{align*}
-			\item Cras faucibus scelerisque cursus. Proin ut vestibulum augue. $\delta(x_i,Y_{n,c})$
-		\end{itemize}
-		\item Fusce tempus arcu id ligula varius dictum. Donec ut nisl dui, ac consectetur elit. In nec enim porta augue venenatis sollicitudin. Phasellus quis nunc neque. Suspendisse mauris diam, suscipit non gravida in, placerat id enim. Ut nec ipsum in lectus ultrices sagittis.
-	\end{itemize}
-	
-\end{block}
-
-%----------------------------------------------------------------------------------------
+}%

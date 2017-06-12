@@ -268,7 +268,7 @@
 %% NEWLENGTHS
 %TODO: sizes of frametitle and footline with respect to fontsize so that other aspect ratios should not change the general layout
 % 	Logo lengths
-\newlength{\LogoHeight}				\setlength{\LogoHeight}{0.07\paperwidth}
+\newlength{\LogoHeight}				\setlength{\LogoHeight}{0.4\paperheight}
 \newlength{\LogoSkip}				\setlength{\LogoSkip}{0.1\LogoHeight}
 %	Rule lengths
 \newlength{\FrametitleRuleWidth}	\setlength{\FrametitleRuleWidth}{0.95\paperwidth}
@@ -436,3 +436,23 @@
 %}
 
 %\beamerdefaultoverlayspecification{<+->}
+
+%%% MARGINS FOR POSTER 
+\usepackage[orientation=portrait,size=a0,scale=1.4]{beamerposter}
+% 	Logo lengths
+\setlength{\LogoHeight}{0.025\paperheight}
+\setlength{\LogoSkip}{0.1\LogoHeight}
+\newlength{\BlankColumnWidthLeft}
+\newlength{\BlankColumnWidthRight}
+\newlength{\BlankColumnWidthCenter}
+\newlength{\titlewidth}
+\newlength{\titleheight}
+\newlength{\LeftColumnWidth}
+\newlength{\RightColumnWidth}
+\newlength{\TitleColumnSpace}
+\setlength{\BlankColumnWidthLeft}{.005\textwidth}
+\setlength{\BlankColumnWidthRight}{.005\textwidth}
+\setlength{\BlankColumnWidthCenter}{.005\textwidth}
+\setlength{\LeftColumnWidth}{.48\textwidth}
+\setlength{\RightColumnWidth}{\dimexpr \textwidth - \BlankColumnWidthLeft - \BlankColumnWidthRight - \BlankColumnWidthCenter - \LeftColumnWidth}
+\setlength{\TitleColumnSpace}{.005\textwidth}
