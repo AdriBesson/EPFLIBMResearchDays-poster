@@ -5,11 +5,12 @@
 
 \begin{block}{Introduction and objectives}
 	
-	\begin{enumerate}
-		\item Donec fringilla, velit id lobortis commodo, eros dui consectetur mi, ut interdum lorem dui sed mauris.
-		\item Nulla ac nulla rhoncus est bibendum ullamcorper:
-		\item Quisque vestibulum, nisl sit amet gravida ultricies dis parturient montes, nascetur ridiculus musobortis commodo, eros dui consectetur mi.
-	\end{enumerate}
+	\begin{itemize}
+		\item The point spread function (PSF), \ie{} the response of a system to a point source, is a measure of the quality of an ultrasound~(US) imager
+		\item PSF usually estimated by assuming spatial-invariance, or estimated via simulation coupled with reconstruction algorithms 
+		\item Lack of an analytical formulation inhibits many applications ranging from optimization of apodization schemes, to array-design to and deconvolution algorithms
+		\item We propose an analytical formulation of the PSF and use it for deconvolution of US images
+	\end{itemize}
 	
 \end{block}
 \vfill
@@ -19,7 +20,6 @@
 %----------------------------------------------------------------------------------------
 
 \begin{block}{Notations and data-model}
-	
 	\begin{columns} % Subdivide the first main column
 		\begin{column}{.54\textwidth} % The first subdivided column within the first main column
 			\begin{itemize}
@@ -50,7 +50,7 @@
 		\begin{equation}
 			m \left(\vect{r}_i, t\right) = \int \limits_{\Omega} b \left(\vect{r}', \vect{r}_i\right) h \left(t - \tau \left(\vect{r}', \vect{r}_i\right)\right) \gamma \left(\vect{r}'\right) d \vect{r}'
 		\end{equation}
-		where $\tau \left(\vect{r}', \vect{r}_i\right) = t_{TX} \left(\vect{r}\right) + \frac{\| \vect{r} - \vect{r}_i \|_2}{c}$ is the round trip time-of-flight of the US wave 
+		where $\tau \left(\vect{r}', \vect{r}_i\right) = t_{TX} \left(\vect{r}'\right) + \frac{\| \vect{r}' - \vect{r}_i \|_2}{c}$ is the round trip time-of-flight of the US wave 
 	\end{itemize}
 	
 \end{block}
@@ -60,7 +60,7 @@
 %	PSF
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Model of the point spread function}
+\begin{block}{Model of the point-spread-function}
 	\begin{itemize}
 		\item Delay-and-sum~(DAS) estimate~(also called RF image) of the TRF:
 		\begin{align}
@@ -69,7 +69,7 @@
 			&= \int \limits_{\Omega} \left[\sum \limits_{i=1}^{N_{el}} w_i h \left(\tau \left(\vect{r}, \vect{r}_i\right) - \tau \left(\vect{r}', \vect{r}_i\right) \right)\right] \gamma\left(\vect{r}'\right) d \vect{r}'
 		\end{align}
 		where $b \left(\vect{r}', \vect{r}_i\right) = 1$
-		\item One may deduce from Equation~\eqref{eq_DAS_estimate} \textbf{the kernel of the PSF}:
+		\item One may deduce the kernel of the PSF from Equation~\eqref{eq_DAS_estimate}:
 		\begin{equation}
 			\label{eq_PSF_estimate}
 			PSF \left(\vect{r}, \vect{r}'\right) = \sum \limits_{i=1}^{N_{el}} w_i h \left(\tau \left(\vect{r}, \vect{r}_i\right) - \tau \left(\vect{r}', \vect{r}_i\right) \right), \; \forall \left(\vect{r}, \vect{r}'\right) \in \Omega^2
@@ -90,11 +90,7 @@
 
 \begin{block}{Validation of the proposed model}
 	\begin{itemize}
-		\item Two phantoms are simulated: 
-		\begin{enumerate}
-			\item Point-scatterers phantom
-			\item Cyst phantom
-		\end{enumerate}
+		\item A cyst phantom is simulated
 		\item The PSF model described in Equation~\eqref{eq_PSF_estimate} is generated with the following settings:
 		\begin{itemize}
 			\item The weights $w_i$ are set to 1
@@ -109,11 +105,10 @@
 	\newlength{\CIRSFigWidth} \setlength{\CIRSFigWidth}{0.48\textwidth}
 	\newlength{\CIRSFigHeight}
 	\settoheight{\CIRSFigHeight}{\includegraphics[width=\CIRSFigWidth]{figures/Cyst_pht1.png}}
-	\newlength{\pointFigWidth} \setlength{\CIRSFigWidth}{0.48\textwidth}
+	\newlength{\pointFigWidth} \setlength{\CIRSFigWidth}{0.4\textwidth}
 	\newlength{\pointFigHeight}
 	\settoheight{\pointFigHeight}{\includegraphics[width=\CIRSFigWidth]{figures/Image_IUS_2017_1.jpg}}
 	\begin{figure}
-		\centering
 		% Maximum length
 %		\subcaptionbox{Reference }{\includegraphics[height=\pointFigHeight]{figures/Image_IUS_2017_1.jpg}}
 %		\hfill%
@@ -121,7 +116,8 @@
 		\subcaptionbox{Field II simulation }{\includegraphics[height=\CIRSFigHeight]{figures/Cyst_pht1.png}}
 		\hfill%
 		\subcaptionbox{PSF model }{\includegraphics[height=\CIRSFigHeight]{figures/Cyst_pht2.png}}
-		\caption{B-mode image reconstructed from (a) Field II simulation and (b) the proposed PSF model.}
+		\hfill%
+		\caption{B-mode image reconstructed from (a) Field II simulation and (b) the proposed PSF model}
 	\end{figure}
 \end{block}
 }%
