@@ -7,11 +7,11 @@
 	\begin{itemize}
 		\item The proposed model relates the low-resolution RF image with the high-resolution TRF 
 		\item It can be used for deconvolution \textit{i.e.} to retrieve the TRF from the RF image 
-		\item Let us define the RF image $\vect{\gamma}^{DAS} \in \mathbb{R}^{N_{\Omega}}$ and the unknown TRF $\vect{\gamma} \in \mathbb{R}^{N_{\Omega}}$ over the spatial grid $\Omega = \left\lbrace \ser{\vect{r}}{j}, j = 1, \dots, N_{\Omega}\right\rbrace$
+		\item Let us define the RF image $\vect{\reflectivity}^{DAS} \in \mathbb{R}^{N_{\Omega}}$ and the unknown TRF $\vect{\reflectivity} \in \mathbb{R}^{N_{\Omega}}$ over the spatial grid $\Omega = \left\lbrace \ser{\vect{r}}{j}, j = 1, \dots, N_{\Omega}\right\rbrace$
 		\item The estimate of the TRF can be expressed from the RF image as:
 		\begin{equation}
 			\label{eq_deconv_pb}
-			\vect{\gamma} \in \arg \min \limits_{\hat{\vect{\gamma}} \in \mathbb{R}^{N_{\Omega}}} \| \hat{\vect{\gamma}} \|_p \textnormal{ subject to } \| \mat{H} \hat{\vect{\gamma}} - \vect{\gamma}^{DAS} \|_2 \leq \epsilon
+			\vect{\reflectivity} \in \arg \min \limits_{\hat{\vect{\reflectivity}} \in \mathbb{R}^{N_{\Omega}}} \| \hat{\vect{\reflectivity}} \|_p \textnormal{ subject to } \| \mat{H} \hat{\vect{\reflectivity}} - \vect{\reflectivity}^{DAS} \|_2 \leq \epsilon
 		\end{equation}
 		where $p \in \left]0, 2\right]$ and $\mat{H} \in \mathbb{R}^{N_{\Omega} \times N_{\Omega}}$ is defined by:
 		\begin{equation*}
