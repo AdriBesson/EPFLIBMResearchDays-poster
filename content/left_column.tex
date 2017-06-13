@@ -8,7 +8,7 @@
 	\begin{itemize}
 		\item The point spread function (PSF), \ie{} the response of a system to a point source, is a measure of the quality of an ultrasound~(US) imager
 		\item PSF usually estimated by assuming spatial-invariance, or estimated via simulation coupled with reconstruction algorithms 
-		\item Lack of an analytical formulation inhibits many applications ranging from optimization of apodization schemes, to array-design to and deconvolution algorithms
+		\item Lack of an analytical formulation inhibits many applications ranging from optimization of apodization schemes, to array-design and deconvolution algorithms
 		\item We propose an analytical formulation of the PSF and use it for deconvolution of US images
 	\end{itemize}
 	
@@ -25,10 +25,10 @@
 			\begin{itemize}
 				\item Notations:
 				\begin{itemize}
-					\item 1D probe composed of $N_{el}$ transducer elements located at $\bm{r}_i$
+					\item 1D probe composed of $M$ transducer elements located at $\vect{p}_i$
 					\item $m_i\left(t\right)$ signal received at $i^{th}$ element
-					\item Medium $\Omega \subset \mathbb{R}^2$ characterized by its tissue reflectivity function~(TRF) $\gamma \left(\vect{r}\right)$
-					\item $b \left(\vect{r}, \vect{r}_i\right)$ spatially varying attenuation term  
+					\item Medium $\Omega \subset \mathbb{R}^2$ characterized by its tissue reflectivity function~(TRF) $\reflectivity \left(\vect{r}\right)$ that we want to recover
+					\item $b \left(\vect{r}, \vect{p}_i\right)$ spatially varying attenuation term  
 					\item $h\left(t\right)$ is the elementary waveform
 				\end{itemize}
 			\end{itemize}
@@ -46,11 +46,11 @@
 	\end{columns} % End of the subdivision
 	
 	\begin{itemize}
-		\item Data-model for a transducer located at $\vect{r}_i$:
-		\begin{equation}
-			m \left(\vect{r}_i, t\right) = \int \limits_{\Omega} b \left(\vect{r}', \vect{r}_i\right) h \left(t - \tau \left(\vect{r}', \vect{r}_i\right)\right) \gamma \left(\vect{r}'\right) d \vect{r}'
-		\end{equation}
-		where $\tau \left(\vect{r}', \vect{r}_i\right) = t_{TX} \left(\vect{r}'\right) + \frac{\| \vect{r}' - \vect{r}_i \|_2}{c}$ is the round trip time-of-flight of the US wave 
+		\item Data-model for a transducer located at $\vect{p}_i$:
+		\begin{equation*}
+			R \left(t, \vect{p}_i\right) = \int \limits_{\Omega} b \left(\vect{s}, \vect{p}_i\right) h \left(t - \tau \left(\vect{s}, \vect{p}_i\right)\right) \reflectivity \left(\vect{s}\right) d \vect{s}
+		\end{equation*}
+		where $\tau \left(\vect{s}, \vect{p}_i\right) = t_{TX} \left(\vect{s}\right) + \frac{\| \vect{s} - \vect{p}_i \|_2}{c}$ is the round trip time-of-flight of the US wave 
 	\end{itemize}
 	
 \end{block}
@@ -60,19 +60,19 @@
 %	PSF
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Model of the point-spread-function}
+\begin{block}{A closed-form formula for the PSF of DAS}
 	\begin{itemize}
 		\item Delay-and-sum~(DAS) estimate~(also called RF image) of the TRF:
 		\begin{align}
 		\label{eq_DAS_estimate}
-			\ser{\gamma}{{DAS}} \left(\vect{r}\right) &= \sum \limits_{i=1}^{N_{el}} w_i m \left(\vect{r}_i, \tau \left(\vect{r}, \vect{r}_i\right)\right) \nonumber \\
-			&= \int \limits_{\Omega} \left[\sum \limits_{i=1}^{N_{el}} w_i h \left(\tau \left(\vect{r}, \vect{r}_i\right) - \tau \left(\vect{r}', \vect{r}_i\right) \right)\right] \gamma\left(\vect{r}'\right) d \vect{r}'
+			\ser{\reflectivity}{{DAS}} \left(\vect{r}\right) &= \sum \limits_{i=1}^{M} w_i R \left(\tau \left(\vect{r}, \vect{p}_i\right), \vect{p}_i\right) \nonumber \\
+			&= \int \limits_{\Omega} \left[\sum \limits_{i=1}^{M} w_i h \left(\tau \left(\vect{r}, \vect{p}_i\right) - \tau \left(\vect{s}, \vect{p}_i\right) \right)\right] \reflectivity\left(\vect{s}\right) d \vect{s}
 		\end{align}
-		where $b \left(\vect{r}', \vect{r}_i\right) = 1$
+		where $b \left(\vect{s}, \vect{p}_i\right) = 1$ and $w_i$ are the apodization weights
 		\item One may deduce the kernel of the PSF from Equation~\eqref{eq_DAS_estimate}:
 		\begin{equation}
 			\label{eq_PSF_estimate}
-			PSF \left(\vect{r}, \vect{r}'\right) = \sum \limits_{i=1}^{N_{el}} w_i h \left(\tau \left(\vect{r}, \vect{r}_i\right) - \tau \left(\vect{r}', \vect{r}_i\right) \right), \; \forall \left(\vect{r}, \vect{r}'\right) \in \Omega^2
+			PSF \left(\vect{r}, \vect{s}\right) = \sum \limits_{i=1}^{M} w_i h \left(\tau \left(\vect{r}, \vect{p}_i\right) - \tau \left(\vect{s}, \vect{p}_i\right) \right), \; \forall \left(\vect{r}, \vect{s}\right) \in \Omega^2
 		\end{equation}
 		\item Generic formulation:
 		\begin{itemize}
@@ -88,7 +88,7 @@
 %	VALIDATION OF THE PROPOSED MODEL
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Validation of the proposed model}
+\begin{block}{Validation of the proposed formula}
 	\begin{itemize}
 		\item A cyst phantom is simulated
 		\item The PSF model described in Equation~\eqref{eq_PSF_estimate} is generated with the following settings:
@@ -102,7 +102,7 @@
 			\item US raw-data are simulated on Field II~\cite{jensen1992} and reconstructed using standard DAS algorithm
 		\end{enumerate}
 	\end{itemize}
-	\newlength{\CIRSFigWidth} \setlength{\CIRSFigWidth}{0.48\textwidth}
+	\newlength{\CIRSFigWidth} \setlength{\CIRSFigWidth}{0.4\textwidth}
 	\newlength{\CIRSFigHeight}
 	\settoheight{\CIRSFigHeight}{\includegraphics[width=\CIRSFigWidth]{figures/Cyst_pht1.png}}
 	\newlength{\pointFigWidth} \setlength{\CIRSFigWidth}{0.4\textwidth}
