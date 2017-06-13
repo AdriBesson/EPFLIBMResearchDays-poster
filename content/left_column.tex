@@ -8,7 +8,7 @@
 	\begin{itemize}
 		\item The point spread function (PSF), \ie{} the response of a system to a point source, is a measure of the quality of an ultrasound~(US) imager
 		\item PSF usually estimated by assuming spatial-invariance, or estimated via simulation coupled with reconstruction algorithms 
-		\item Lack of an analytical formulation inhibits many applications ranging from optimization of apodization schemes, to array-design to and deconvolution algorithms
+		\item Lack of an analytical formulation inhibits many applications ranging from optimization of apodization schemes, to array-design and deconvolution algorithms
 		\item We propose an analytical formulation of the PSF and use it for deconvolution of US images
 	\end{itemize}
 	
@@ -60,7 +60,7 @@
 %	PSF
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Model of the point-spread-function}
+\begin{block}{A closed-form formula for the PSF of DAS}
 	\begin{itemize}
 		\item Delay-and-sum~(DAS) estimate~(also called RF image) of the TRF:
 		\begin{align}
@@ -68,7 +68,7 @@
 			\ser{\gamma}{{DAS}} \left(\vect{r}\right) &= \sum \limits_{i=1}^{N_{el}} w_i m \left(\vect{r}_i, \tau \left(\vect{r}, \vect{r}_i\right)\right) \nonumber \\
 			&= \int \limits_{\Omega} \left[\sum \limits_{i=1}^{N_{el}} w_i h \left(\tau \left(\vect{r}, \vect{r}_i\right) - \tau \left(\vect{r}', \vect{r}_i\right) \right)\right] \gamma\left(\vect{r}'\right) d \vect{r}'
 		\end{align}
-		where $b \left(\vect{r}', \vect{r}_i\right) = 1$
+		where $b \left(\vect{r}', \vect{r}_i\right) = 1$ and $w_i=1$
 		\item One may deduce the kernel of the PSF from Equation~\eqref{eq_DAS_estimate}:
 		\begin{equation}
 			\label{eq_PSF_estimate}
@@ -88,7 +88,7 @@
 %	VALIDATION OF THE PROPOSED MODEL
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Validation of the proposed model}
+\begin{block}{Validation of the proposed formula}
 	\begin{itemize}
 		\item A cyst phantom is simulated
 		\item The PSF model described in Equation~\eqref{eq_PSF_estimate} is generated with the following settings:
@@ -102,7 +102,7 @@
 			\item US raw-data are simulated on Field II~\cite{jensen1992} and reconstructed using standard DAS algorithm
 		\end{enumerate}
 	\end{itemize}
-	\newlength{\CIRSFigWidth} \setlength{\CIRSFigWidth}{0.48\textwidth}
+	\newlength{\CIRSFigWidth} \setlength{\CIRSFigWidth}{0.4\textwidth}
 	\newlength{\CIRSFigHeight}
 	\settoheight{\CIRSFigHeight}{\includegraphics[width=\CIRSFigWidth]{figures/Cyst_pht1.png}}
 	\newlength{\pointFigWidth} \setlength{\CIRSFigWidth}{0.4\textwidth}

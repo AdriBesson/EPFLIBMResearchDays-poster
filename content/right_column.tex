@@ -7,11 +7,11 @@
 	\begin{itemize}
 		\item The proposed model relates the low-resolution RF image with the high-resolution TRF 
 		\item It can be used for deconvolution \textit{i.e.} to retrieve the TRF from the RF image 
-		\item Let us define the RF image $\vect{s} \in \mathbb{R}^{N_{\Omega}}$ and the unknown TRF $\vect{\gamma} \in \mathbb{R}^{N_{\Omega}}$ over the spatial grid $\Omega = \left\lbrace \ser{\vect{r}}{j}, j = 1, \dots, N_{\Omega}\right\rbrace$
+		\item Let us define the RF image $\vect{\gamma}^{DAS} \in \mathbb{R}^{N_{\Omega}}$ and the unknown TRF $\vect{\gamma} \in \mathbb{R}^{N_{\Omega}}$ over the spatial grid $\Omega = \left\lbrace \ser{\vect{r}}{j}, j = 1, \dots, N_{\Omega}\right\rbrace$
 		\item The estimate of the TRF can be expressed from the RF image as:
 		\begin{equation}
 			\label{eq_deconv_pb}
-			\vect{\gamma} \in \arg \min \limits_{\hat{\vect{\gamma}} \in \mathbb{R}^{N_{\Omega}}} \| \hat{\vect{\gamma}} \|_p \textnormal{ subject to } \| \mat{H} \hat{\vect{\gamma}} - \vect{s} \|_2 \leq \epsilon
+			\vect{\gamma} \in \arg \min \limits_{\hat{\vect{\gamma}} \in \mathbb{R}^{N_{\Omega}}} \| \hat{\vect{\gamma}} \|_p \textnormal{ subject to } \| \mat{H} \hat{\vect{\gamma}} - \vect{\gamma}^{DAS} \|_2 \leq \epsilon
 		\end{equation}
 		where $p \in \left]0, 2\right]$ and $\mat{H} \in \mathbb{R}^{N_{\Omega} \times N_{\Omega}}$ is defined by:
 		\begin{equation*}
@@ -70,12 +70,12 @@
 
 \begin{block}{Conclusion}
 	\begin{itemize}
-		\item An analytical formulation of the point-spread function is proposed and validated against simulated images. The proposed operator is grid-independent and compatible with any transmit scheme and apodization
+		\item An analytical formulation of the point-spread function is proposed and validated against simulated images. The proposed formulation is grid-independent and compatible with any transmit scheme and apodization
 		\item The proposed operator is used for deconvolution of ultrasound images and exhibits better results than standard approaches
 		\item Perspectives:
 		\begin{itemize}
 			\item Validation on \textit{in-vitro} and \textit{in-vivo} data
-			\item Presentation at IEEE International Ultrasound Symposium 2017
+			\item Presentation at IEEE International Ultrasonics Symposium 2017~\cite{Roquette_IUS_2017}
 		\end{itemize}
 	\end{itemize}
 \end{block}
